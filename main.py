@@ -27,19 +27,24 @@ class HtmlManager:
 
 class AWSManager:
     def __init__(self):
-        pass
+        self.s3_client= boto3.client('s3')
         
     def connect(self):
-        s3_client = boto3.client('s3')
-        s3_client.upload_file(
+        self.s3_client.upload_file(
         'MohammedRahman.html', 'lmtd-class', 'MohammedRahman.html')
+    
+    def load_from_s3(self):
+        self.s3_client.download_file('lmtd-class', 'test.html', 'coolhtmlfroms3.html')
 
 
-# s1 = HtmlDocument()
-# s1.save() 
+s1 = HtmlDocument()
+s1.save() 
 
 s2 = AWSManager()
 s2.connect()
+s2.load_from_s3()
+
+
 
 
 
